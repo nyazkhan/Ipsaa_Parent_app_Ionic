@@ -1,0 +1,7 @@
+{
+  "name": "IpsaParentPortal",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
