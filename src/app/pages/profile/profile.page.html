@@ -1,0 +1,194 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card class="welcome-card" *ngIf="parent[0]">
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Select Student</ion-label>
+        <ion-select [ngModel]="parent[0].id" okText="Okay" (ngModelChange)="getSelectedStudent($event)" cancelText="Dismiss"
+          >
+          <ion-select-option *ngFor=" let chaild of parent;" [value]="chaild.id">{{chaild.fullName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+  </ion-card>
+  <ion-card>
+    <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img>
+    <ion-card-header>
+      <ion-card-title>
+        {{student?.fullName}}
+      </ion-card-title>
+
+      <ion-card-subtitle>
+        Admission Number <ion-badge> {{ student?.admissionNumber}}</ion-badge>
+        <br>
+        Admission Date <ion-badge> {{ student?.admissionDate}}</ion-badge>
+        <!-- Admission Number  {{ student?.admissionNumber}} -->
+      </ion-card-subtitle>
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>
+
+
+              <ion-badge slot="start" color="primary">
+
+                {{student?.admissionDate}}
+              </ion-badge>
+              <br>
+              <ion-badge color="secondary">
+
+                {{student?.gender}}
+              </ion-badge>
+              <ion-badge slot="start" color="primary">
+
+                {{student?.bloodGroup}}
+              </ion-badge>
+              <br>
+              <ion-badge slot="start" color="warning">
+
+                {{student?.familyType}}
+              </ion-badge>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-badge slot="start" color="primary">
+
+                {{student?.center?.name}}
+              </ion-badge>
+              <br>
+              <ion-badge color="secondary">
+
+                {{student?.program?.name}}
+              </ion-badge>
+              <br>
+
+              <ion-badge slot="start" color="warning">
+
+                {{student?.group?.name}}
+              </ion-badge>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+
+
+  </ion-card>
+
+
+  <ion-card *ngFor="let parent of student?.parents">
+    <!-- <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img> -->
+    <ion-card-header>
+      <ion-card-subtitle>
+        {{parent?.relationship}}
+      </ion-card-subtitle>
+      <ion-card-title>
+        {{parent?.fullName}}
+      </ion-card-title>
+
+      <ion-card-subtitle>
+        {{parent?.email}}<br>
+        {{parent?.mobile}}
+      </ion-card-subtitle>
+
+    </ion-card-header>
+    <ion-card-content>
+
+      <h4 *ngIf="parent.educationalQualification">
+        Educational Qualification {{parent?.educationalQualification}}
+        <br>
+      </h4>
+      <h4 *ngIf="parent.occupation">
+
+        Occupation {{parent?.occupation}}
+        <br>
+      </h4>
+      <h4 *ngIf="parent.designation">
+
+        Designation {{parent?.designation}}
+        <br>
+      </h4>
+      <h4 *ngIf="parent.organisation">
+
+        Organisation {{parent?.organisation}}
+        <br>
+      </h4>
+
+
+      <ion-badge slot="start" color="primary">
+
+        Office Address
+      </ion-badge><br>
+      {{parent?.officeAddress?.address}} {{parent?.officeAddress?.city}}
+      <br>
+      {{parent?.officeAddress?.state}} {{parent?.officeAddress?.zip}}
+      <br>
+
+
+      <ion-badge slot="start" color="primary">
+
+        Residential Address
+      </ion-badge>
+      <br>
+      {{parent?.residentialAddress?.address}} {{parent?.residentialAddress?.city}}
+      <br>
+      {{parent?.residentialAddress?.state}} {{parent?.residentialAddress?.zip}}
+      <br>
+    </ion-card-content>
+
+
+  </ion-card>
+
+  <ion-card>
+    <!-- <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img> -->
+    <ion-card-header>
+
+      <ion-card-title>
+        Notification
+
+      </ion-card-title>
+      <ion-card-subtitle>
+          Change Sms or Email notification setting for Check-in and Check-out of student.
+
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngFor="let parent of student?.parents">
+        <ion-label> {{parent.relationship}}
+        </ion-label>
+
+        <ion-item>
+          <ion-label>
+            SMS ({{parent.mobile}})
+          </ion-label>
+          <br>
+          <ion-toggle [(ngModel)]="parent.smsEnabled" (ngModelChange)="notify(parent,'sms')"></ion-toggle>
+          <!-- <p>SMS ({{parent.mobile}})</p> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Email ({{parent.email}})
+          </ion-label>
+          <ion-toggle [(ngModel)]="parent.emailEnabled" (ngModelChange)="notify(parent,'email')"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+
+  </ion-card>
+
+</ion-content>

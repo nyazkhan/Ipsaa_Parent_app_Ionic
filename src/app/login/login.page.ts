@@ -2,9 +2,9 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController, MenuController, Events, NavController } from '@ionic/angular';
 import { AuthService } from '../providers/auth.service';
-import { CustomService } from '../providers/custom.service';
 import { User } from '../providers/user';
 import { Router } from '@angular/router';
+import { AlertService } from '../providers/alertService';
 
 @Component({
   selector: 'app-login',
@@ -21,11 +21,12 @@ export class LoginPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public formBuilder: FormBuilder,
-    private customService: CustomService,
     private userService: User,
-    private events: Events,
-    private menu: MenuController,
-    private modalCtrl: ModalController,
+    private alertservice: AlertService,
+    private authService: AuthService,
+    // private events: Events,
+    // private menu: MenuController,
+    // private modalCtrl: ModalController,
     private router: Router
   ) {
   }
@@ -36,8 +37,9 @@ export class LoginPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['khannyaz1705@gmail.com', Validators
         .compose([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')])],
-      password: ['abc123', Validators.required]
+      password: ['ajay0211', Validators.required]
     });
+    this.authService.isLoggedIn();
   }
 
   get email() { return this.loginForm.get('email'); }
@@ -46,25 +48,25 @@ export class LoginPage implements OnInit {
 
 
   login() {
-
+    this.alertservice.presentLoading(' please wait..');
     this.submitAttempt = true;
-    // console.log(this.loginForm.value);
     this.userService.login(this.loginForm.value).subscribe(
       (response: any) => {
+        this.alertservice.hideLoader();
         this.submitAttempt = false;
         this.onSuccess();
       },
       (error: any) => {
+        this.alertservice.hideLoader();
         this.submitAttempt = false;
+
       }
     );
   }
   onSuccess() {
     const user: any = this.userService.getUser();
     if (user.domain === '/pp/') {
-      console.log('login successfuly');
-
-      this.router.navigate(['/home']);
+      this.router.navigate(['/profile']);
     } else {
       // this.router.navigate(['mis']);
     }

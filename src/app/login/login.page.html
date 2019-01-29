@@ -1,49 +1,4 @@
 
-<!-- <ion-content >
-
-  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="loginForm">
-    <ion-title class="logintitle"> 
-   <b>Login</b>
-    </ion-title>
-     
-        
-     <div style="position: relative;"> 
-        <div class="avatar">
-            <img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg" class="avtarImage">
-        </div>
-      <ion-card class="loginCard">
-      
-      <ion-item>
-        <ion-icon color="primary" name="person" item-left></ion-icon>
-        <ion-label stacked>Contact No.</ion-label>
-        <ion-input type="text" formControlName="email" placeholder="Add phone number"></ion-input>
-      </ion-item>
-      <div *ngIf="(email.dirty || submitAttempt) && !email.valid" class="valid">
-        <span *ngIf="email.hasError('required')" >Contact No. is required.</span>
-        <span *ngIf="email.hasError('pattern')" >Contact No. is invalid.</span>
-      </div>
-
-      <ion-item>
-        <ion-icon color="primary" name="unlock" item-left></ion-icon>
-        <ion-label stacked>Password</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="Add Password"></ion-input>
-      </ion-item>
-      <div no-lines *ngIf="(password.dirty || submitAttempt) && !password.valid" class="valid" margin-bottom>
-        <span>Password is required.</span>
-      </div>
-      <button type="submit" class="loginSubmit" ion-button full>Log In</button>
-
-    </ion-card>
-  </div> 
-
-    <button type="button" ion-button round small margin-right (click)="onRegister()" float-right>Register</button>
-
-    
-
-
-
-  </form>
- </ion-content> -->
 <ion-content padding style="--color: white; --background: url('https://images.unsplash.com/photo-1530579807716-d82c0991629a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c708171e9cdb8ae7ed04f8e37e2808c&auto=format&fit=crop&w=934&q=80') no-repeat center center fixed" >
   
   <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="loginForm">
@@ -82,18 +37,12 @@
         </div>
         <br>
 
-        <ion-button type="submit" shape="round" center> Login</ion-button>
-
-
-
-
+        <ion-button type="submit"  *ngIf="!submitAttempt" shape="round" center> Login</ion-button>
+        <ion-button   *ngIf="submitAttempt" shape="round" center> Logging</ion-button>
 
 
       </ion-card-content>
-      <!-- <ion-footer> -->
-        <!-- <button type="submit" class="loginSubmit" ion-button full>Log In</button> -->
-        
-      <!-- </ion-footer> -->
+
     </ion-card>
   </form>
 </ion-content>
