@@ -7,188 +7,285 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-card class="welcome-card" *ngIf="parent[0]">
-
+<ion-content no-padding>
+   <ion-card class="welcome-card" *ngIf="parent[0]">
     <ion-list>
       <ion-item>
         <ion-label>Select Student</ion-label>
-        <ion-select [ngModel]="parent[0].id" okText="Okay" (ngModelChange)="getSelectedStudent($event)" cancelText="Dismiss"
-          >
+        <ion-select [ngModel]="parent[0].id" okText="Okay" (ngModelChange)="getSelectedStudent($event)" cancelText="Dismiss">
           <ion-select-option *ngFor=" let chaild of parent;" [value]="chaild.id">{{chaild.fullName}}</ion-select-option>
         </ion-select>
       </ion-item>
 
     </ion-list>
   </ion-card>
-  <ion-card>
-    <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img>
-    <ion-card-header>
-      <ion-card-title>
-        {{student?.fullName}}
-      </ion-card-title>
+ <!-- <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-card>
+        <ion-img  *ngIf="student.imagePath" class="img" [src]=" 'https://portal.ipsaa.in/' +student.imagePath" ></ion-img>
+        <ion-img  *ngIf="!student.imagePath" class="img" src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg" ></ion-img>
 
-      <ion-card-subtitle>
-        Admission Number <ion-badge> {{ student?.admissionNumber}}</ion-badge>
-        <br>
-        Admission Date <ion-badge> {{ student?.admissionDate}}</ion-badge>
-        <!-- Admission Number  {{ student?.admissionNumber}} -->
-      </ion-card-subtitle>
+        <ion-card-header no-padding>
+          <ion-card-title padding>
+            {{student?.fullName}}
+          </ion-card-title>
 
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div>
-
-
-              <ion-badge slot="start" color="primary">
-
-                {{student?.admissionDate}}
-              </ion-badge>
-              <br>
-              <ion-badge color="secondary">
-
-                {{student?.gender}}
-              </ion-badge>
-              <ion-badge slot="start" color="primary">
-
-                {{student?.bloodGroup}}
-              </ion-badge>
-              <br>
-              <ion-badge slot="start" color="warning">
-
-                {{student?.familyType}}
-              </ion-badge>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div>
-              <ion-badge slot="start" color="primary">
-
-                {{student?.center?.name}}
-              </ion-badge>
-              <br>
-              <ion-badge color="secondary">
-
-                {{student?.program?.name}}
-              </ion-badge>
-              <br>
-
-              <ion-badge slot="start" color="warning">
-
-                {{student?.group?.name}}
-              </ion-badge>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-
-
-  </ion-card>
-
-
-  <ion-card *ngFor="let parent of student?.parents">
-    <!-- <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img> -->
-    <ion-card-header>
-      <ion-card-subtitle>
-        {{parent?.relationship}}
-      </ion-card-subtitle>
-      <ion-card-title>
-        {{parent?.fullName}}
-      </ion-card-title>
-
-      <ion-card-subtitle>
-        {{parent?.email}}<br>
-        {{parent?.mobile}}
-      </ion-card-subtitle>
-
-    </ion-card-header>
-    <ion-card-content>
-
-      <h4 *ngIf="parent.educationalQualification">
-        Educational Qualification {{parent?.educationalQualification}}
-        <br>
-      </h4>
-      <h4 *ngIf="parent.occupation">
-
-        Occupation {{parent?.occupation}}
-        <br>
-      </h4>
-      <h4 *ngIf="parent.designation">
-
-        Designation {{parent?.designation}}
-        <br>
-      </h4>
-      <h4 *ngIf="parent.organisation">
-
-        Organisation {{parent?.organisation}}
-        <br>
-      </h4>
-
-
-      <ion-badge slot="start" color="primary">
-
-        Office Address
-      </ion-badge><br>
-      {{parent?.officeAddress?.address}} {{parent?.officeAddress?.city}}
-      <br>
-      {{parent?.officeAddress?.state}} {{parent?.officeAddress?.zip}}
-      <br>
-
-
-      <ion-badge slot="start" color="primary">
-
-        Residential Address
-      </ion-badge>
-      <br>
-      {{parent?.residentialAddress?.address}} {{parent?.residentialAddress?.city}}
-      <br>
-      {{parent?.residentialAddress?.state}} {{parent?.residentialAddress?.zip}}
-      <br>
-    </ion-card-content>
-
-
-  </ion-card>
-
-  <ion-card>
-    <!-- <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img> -->
-    <ion-card-header>
-
-      <ion-card-title>
-        Notification
-
-      </ion-card-title>
-      <ion-card-subtitle>
-          Change Sms or Email notification setting for Check-in and Check-out of student.
-
-      </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list *ngFor="let parent of student?.parents">
-        <ion-label> {{parent.relationship}}
-        </ion-label>
+        </ion-card-header>
 
         <ion-item>
-          <ion-label>
-            SMS ({{parent.mobile}})
-          </ion-label>
-          <br>
-          <ion-toggle [(ngModel)]="parent.smsEnabled" (ngModelChange)="notify(parent,'sms')"></ion-toggle>
-          <!-- <p>SMS ({{parent.mobile}})</p> -->
+          Admission Number
+          <ion-badge slot="end">{{ student?.admissionNumber}}</ion-badge>
         </ion-item>
         <ion-item>
-          <ion-label>
-            Email ({{parent.email}})
-          </ion-label>
-          <ion-toggle [(ngModel)]="parent.emailEnabled" (ngModelChange)="notify(parent,'email')"></ion-toggle>
+          Admission Date
+          <ion-badge slot="end">{{ student?.admissionDate}}</ion-badge>
         </ion-item>
-      </ion-list>
-    </ion-card-content>
+
+        <ion-item>
+          Gender
+          <ion-badge slot="end">{{student?.gender}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          Blood Group*
+          <ion-badge slot="end">{{student?.bloodGroup}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          Center
+          <ion-badge slot="end">{{student?.center?.name}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          Program
+          <ion-badge slot="end">{{student?.program?.name}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          Group
+          <ion-badge slot="end">{{student?.group?.name}}</ion-badge>
+        </ion-item>
 
 
-  </ion-card>
+
+      </ion-card>
+    </ion-slide>
+    <ion-slide *ngFor="let parent of student?.parents">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>
+            <h3 no-margin>{{parent?.relationship}}</h3>
+          </ion-card-subtitle>
+
+        </ion-card-header>
+        <ion-item>
+          Name:<span slot="end">{{parent?.fullName}}</span>
+        </ion-item>
+        <ion-item>
+          Email:<span slot="end">{{parent?.email}}</span>
+        </ion-item>
+        <ion-item>
+          Mobile Number:<span slot="end">{{parent?.mobile}}</span>
+        </ion-item>
+
+        <ion-item *ngIf="parent.educationalQualification">
+          Educational Qualification: <span slot="end">{{parent?.educationalQualification}}</span>
+
+        </ion-item>
+        <ion-item *ngIf="parent.occupation">
+
+          Occupation: <span slot="end">{{parent?.occupation}}</span>
+
+        </ion-item>
+        <ion-item *ngIf="parent.designation">
+
+          Designation <span slot="end">{{parent?.designation}}</span>
+
+        </ion-item>
+        <ion-item *ngIf="parent.organisation">
+
+          Organisation <span slot="end">{{parent?.organisation}}</span>
+
+        </ion-item>
+        <div margin-top>
+          <h4 no-margin padding> Notification </h4>
+          <ion-item>
+            <ion-label>
+              SMS ({{parent.mobile}})
+            </ion-label>
+            <br>
+            <ion-toggle [(ngModel)]="parent.smsEnabled" (ngModelChange)="notify(parent,'sms')"></ion-toggle>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label>
+              Email ({{parent.email}})
+            </ion-label>
+            <ion-toggle [(ngModel)]="parent.emailEnabled" (ngModelChange)="notify(parent,'email')"></ion-toggle>
+          </ion-item>
+        </div>
+
+        <div padding margin-top>
+          <h4 no-margin>Office Address: </h4>
+          <span no-margin>
+            {{parent?.officeAddress?.address}}, {{parent?.officeAddress?.city}},
+            {{parent?.officeAddress?.state}}, {{parent?.officeAddress?.zip}}
+          </span>
+        </div>
+
+        <div padding>
+          <h4 no-margin> Residential Address: </h4>
+          <span no-margin>
+            {{parent?.residentialAddress?.address}}, {{parent?.residentialAddress?.city}},
+            {{parent?.residentialAddress?.state}}, {{parent?.residentialAddress?.zip}}
+          </span>
+        </div>
+
+
+
+
+
+
+      </ion-card>
+    </ion-slide>
+  </ion-slides> -->
+
+
+    <div padding>
+      <ion-segment [(ngModel)]="studentDetailssegment">
+        <ion-segment-button value="student" >
+          Student
+        </ion-segment-button>
+        <ion-segment-button *ngFor="let parent of  student?.parents; let i = index" value="parent{{i}}">
+         {{ parent.relationship}}
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  
+    <div [ngSwitch]="studentDetailssegment">
+        <ion-card *ngSwitchCase="'student'" >
+          <ion-img  *ngIf="student?.imagePath" class="img" [src]=" 'https://portal.ipsaa.in/' +student.imagePath" ></ion-img>
+          <ion-img  *ngIf="!student?.imagePath" class="img" src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg" ></ion-img>
+  
+          <ion-card-header no-padding>
+            <ion-card-title padding>
+              {{student?.fullName}}
+            </ion-card-title>
+  
+          </ion-card-header>
+  
+          <ion-item>
+            Admission Number
+            <ion-badge slot="end">{{ student?.admissionNumber}}</ion-badge>
+          </ion-item>
+          <ion-item>
+            Admission Date
+            <ion-badge slot="end">{{ student?.admissionDate}}</ion-badge>
+          </ion-item>
+  
+          <ion-item>
+            Gender
+            <ion-badge slot="end">{{student?.gender}}</ion-badge>
+          </ion-item>
+          <ion-item>
+            Blood Group*
+            <ion-badge slot="end">{{student?.bloodGroup}}</ion-badge>
+          </ion-item>
+          <ion-item>
+            Center
+            <ion-badge slot="end">{{student?.center?.name}}</ion-badge>
+          </ion-item>
+          <ion-item>
+            Program
+            <ion-badge slot="end">{{student?.program?.name}}</ion-badge>
+          </ion-item>
+          <ion-item>
+            Group
+            <ion-badge slot="end">{{student?.group?.name}}</ion-badge>
+          </ion-item>
+  
+  
+  
+        </ion-card>
+  
+      <div *ngFor="let parent of student?.parents; let i = index"  >
+        <ion-card  *ngSwitchCase="'parent' + i" >
+          <ion-card-header>
+            <ion-card-subtitle>
+              <h3 no-margin>{{parent?.relationship}}</h3>
+            </ion-card-subtitle>
+  
+          </ion-card-header>
+          <ion-item>
+            Name:<span slot="end">{{parent?.fullName}}</span>
+          </ion-item>
+          <ion-item>
+            Email:<span slot="end">{{parent?.email}}</span>
+          </ion-item>
+          <ion-item>
+            Mobile Number:<span slot="end">{{parent?.mobile}}</span>
+          </ion-item>
+  
+          <ion-item *ngIf="parent.educationalQualification">
+            Educational Qualification: <span slot="end">{{parent?.educationalQualification}}</span>
+  
+          </ion-item>
+          <ion-item *ngIf="parent.occupation">
+  
+            Occupation: <span slot="end">{{parent?.occupation}}</span>
+  
+          </ion-item>
+          <ion-item *ngIf="parent.designation">
+  
+            Designation <span slot="end">{{parent?.designation}}</span>
+  
+          </ion-item>
+          <ion-item *ngIf="parent.organisation">
+  
+            Organisation <span slot="end">{{parent?.organisation}}</span>
+  
+          </ion-item>
+          <div margin-top>
+            <h4 no-margin padding> Notification </h4>
+            <ion-item>
+              <ion-label>
+                SMS ({{parent.mobile}})
+              </ion-label>
+              <br>
+              <ion-toggle [(ngModel)]="parent.smsEnabled" (ngModelChange)="notify(parent,'sms')"></ion-toggle>
+            </ion-item>
+  
+  
+            <ion-item>
+              <ion-label>
+                Email ({{parent.email}})
+              </ion-label>
+              <ion-toggle [(ngModel)]="parent.emailEnabled" (ngModelChange)="notify(parent,'email')"></ion-toggle>
+            </ion-item>
+          </div>
+  
+          <div padding margin-top>
+            <h4 no-margin>Office Address: </h4>
+            <span no-margin>
+              {{parent?.officeAddress?.address}}, {{parent?.officeAddress?.city}},
+              {{parent?.officeAddress?.state}}, {{parent?.officeAddress?.zip}}
+            </span>
+          </div>
+  
+          <div padding>
+            <h4 no-margin> Residential Address: </h4>
+            <span no-margin>
+              {{parent?.residentialAddress?.address}}, {{parent?.residentialAddress?.city}},
+              {{parent?.residentialAddress?.state}}, {{parent?.residentialAddress?.zip}}
+            </span>
+          </div>
+  
+  
+  
+  
+  
+  
+        </ion-card>
+  </div>
+    </div>
+
+
 
 </ion-content>

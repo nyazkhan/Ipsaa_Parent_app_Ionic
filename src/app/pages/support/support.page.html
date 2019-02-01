@@ -8,18 +8,25 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list>
-        <ion-item *ngFor="let item of items">
-          <ion-icon [name]="item.icon" slot="start"></ion-icon>
-          {{item.title}}
-          <div class="item-note" slot="end">
-            {{item.note}}
-          </div>
-        </ion-item>
-      </ion-list>
+    <ion-card *ngFor=" let query of queries">
+      <ion-card-header>
+        <ion-card-subtitle>
+          Title
+        </ion-card-subtitle>
+        <ion-card-title>
+{{query.title}}
+        </ion-card-title>
+        <ion-badge>{{query.status}}</ion-badge>
+        <h3>Created at <ion-badge slot="end"  > {{ query.created}}</ion-badge></h3>
+        <h3>Last Action <ion-badge slot="end" > {{ query.lastAction}}</ion-badge></h3>
       
-        <div *ngIf="selectedItem" padding>
-          You navigated here from <b>{{selectedItem.title }}</b>
-        </div>
-     
-</ion-content>
+            <ion-button (click)="getQueryDetails(query.id)">
+              Action
+            </ion-button>
+      </ion-card-header>
+      <ion-card-content>
+
+      </ion-card-content>
+    </ion-card>
+         
+       </ion-content>

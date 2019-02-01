@@ -1,188 +1,146 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-    <ion-title>fee</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fee</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-
   <ion-card class="welcome-card" *ngIf="parent[0]">
 
     <ion-list>
       <ion-item>
         <ion-label>Select Student</ion-label>
-        <ion-select [ngModel]="parent[0]?.id" okText="Okay" (ngModelChange)="onStudentChange($event)" cancelText="Dismiss"
-          >
+        <ion-select [ngModel]="parent[0]?.id" okText="Okay" (ngModelChange)="onStudentChange($event)" cancelText="Dismiss">
           <ion-select-option *ngFor=" let chaild of parent;" [value]="chaild.id">{{chaild.fullName}}</ion-select-option>
         </ion-select>
       </ion-item>
 
     </ion-list>
   </ion-card>
-  <ion-card *ngIf="fee">
-    <!-- <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img> -->
-    <ion-card-header>
-      <ion-card-title>
-        {{fee?.fullName}}
-      </ion-card-title>
-
-      <ion-card-subtitle>
-        Admission Number <ion-badge> {{fee?.admissionNumber}}</ion-badge>
-      </ion-card-subtitle>
-
-    </ion-card-header>
-    <ion-card-content>
-
-      <div style="text-align: center">
-        <!-- <h4>{{fee.admissionNumber}}</h4>
-          <h6 class="category">{{fee.fullName}}</h6> -->
-        <h3 *ngIf="checkoutDetails">Rs. {{checkoutDetails?.feeAmount}}</h3>
-        <ion-badge color="primary">
-          {{fee.center?.name}}</ion-badge> <br>
-        <ion-badge color="primary">
-          {{fee.program?.name}}</ion-badge> <br>
-
-        <ion-badge slot="start" color="primary">
-          {{fee.group?.name}}</ion-badge>
-        <br>
-        <p class="card-description">
-          You can click on the button below and pay the fee via Hdfc gateway
-        </p>
-        <div>
-          <a [href]=linkPage target="_blank">
-            Pay now
-          </a>
-
-        </div>
-      </div>
-
-
-    </ion-card-content>
-
-
-  </ion-card>
-
-
-  <ion-card *ngIf="fee">
-    <!-- <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img> -->
-    <ion-card-header>
-      <ion-card-title>
-        Fee Details
-      </ion-card-title>
-
-
-    </ion-card-header>
-    <ion-card-content>
-
-
-
-      <h3>
-        Name {{fee.fullName}}
-      </h3>
-      <br>
-      <h3>
-        Program {{fee.program.name}}
-      </h3>
-      <br>
-      <h3>
-        Group {{fee.group.name}}
-      </h3>
-      <br>
-      <h3>
-        Center {{fee.center.name}}
-      </h3>
-      <br>
-      <h3>
-        Fee {{fee.finalFee}}
-      </h3>
-      <br>
-      <h3>
-        Transport Fee {{fee.transportFee}}
-      </h3>
-      <br>
-      <h3>
-        Type {{fee.feeDuration}}
-      </h3>
-      <br>
-
-
-    </ion-card-content>
-
-
-  </ion-card>
-
-
-  <ion-card *ngIf="studentfeeledger">
-    <!-- <ion-img src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg"></ion-img> -->
-    <ion-card-header>
-      <ion-card-title>
-        Last Payment
-      </ion-card-title>
-
-
-    </ion-card-header>
-    <ion-card-content>
-
-      <h4>Month
-
-        {{studentfeeledger.monthName}}
-      </h4> <br>
-      <h4>Year
-
-        {{studentfeeledger.year}}
-      </h4> <br>
-      <h4>Fee
-
-        {{studentfeeledger.baseFee}}
-      </h4> <br>
-      <h4 *ngIf="studentfeeledger.annualFee!=null">Annual Fee
-
-        {{studentfeeledger.annualFee}}
-      </h4> <br>
-      <h4 *ngIf="studentfeeledger.deposit!=null">Deposit
-
-        {{studentfeeledger.deposit}}
-      </h4> <br>
-      <h4>Extra Charges
-
-        {{studentfeeledger.extraCharge}}
-      </h4> <br>
-      <h4>Late Payment Charges
-
-        {{studentfeeledger.latePaymentCharge}}
-      </h4> <br>
-      <h4>Total
-
-        {{studentfeeledger.totalFee}}
-      </h4> <br>
-      <h4>Invoice Date
-
-        {{studentfeeledger.invoiceDate}}
-      </h4> <br>
-      <h4>Payments
-
-      </h4> <br>
-      <h4>Status
-
-        {{studentfeeledger.paymentStatus}}
-      </h4>
-
-
-      <ion-button (click)="slipDownload(studentfeeledger.id)" >
-        <i class="fa fa-spinner fa-fw fa-pulse fa-2x" ></i>
-        <span class="glyphicon glyphicon-download-alt"></span> slip
-      </ion-button>
-      <ion-button (click)="receiptDownload(studentfeeledger.id)" *ngIf="studentfeeledger.paymentStatus=='Paid' || studentfeeledger.paymentStatus=='PartiallyPaid'">
-        <i class="fa fa-spinner fa-fw fa-pulse fa-2x" ></i>
-        <span class="glyphicon glyphicon-download-alt"></span> receipt
-      </ion-button>
-    </ion-card-content>
-
-
-  </ion-card>
-
-
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-card *ngIf="fee">
+        <ion-card-header>
+          <ion-card-title>
+            {{fee?.fullName}}
+          </ion-card-title>
+          <ion-card-subtitle>
+            Admission Number <ion-badge> {{fee?.admissionNumber}}</ion-badge>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div style="text-align: center">
+            <h3 *ngIf="checkoutDetails">Rs. {{checkoutDetails?.feeAmount}}</h3>
+            <ion-badge color="primary">
+              {{fee.center?.name}}</ion-badge> <br>
+            <ion-badge color="primary">
+              {{fee.program?.name}}</ion-badge> <br>
+            <ion-badge slot="start" color="primary">
+              {{fee.group?.name}}</ion-badge>
+            <br>
+            <p class="card-description">
+              You can click on the button below and pay the fee via Hdfc gateway
+            </p>
+            <div>
+              <a [href]=linkPage target="_blank">
+                Pay now
+              </a>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card *ngIf="fee">
+        <ion-card-header>
+          <ion-card-title>
+            Fee Details
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <h3>
+            Name {{fee.fullName}}
+          </h3>
+          <br>
+          <h3>
+            Program {{fee.program.name}}
+          </h3>
+          <br>
+          <h3>
+            Group {{fee.group.name}}
+          </h3>
+          <br>
+          <h3>
+            Center {{fee.center.name}}
+          </h3>
+          <br>
+          <h3>
+            Fee {{fee.finalFee}}
+          </h3>
+          <br>
+          <h3>
+            Transport Fee {{fee.transportFee}}
+          </h3>
+          <br>
+          <h3>
+            Type {{fee.feeDuration}}
+          </h3>
+          <br>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card *ngIf="studentfeeledger">
+        <ion-card-header>
+          <ion-card-title>
+            Last Payment
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <h4>Month
+            {{studentfeeledger.monthName}}
+          </h4> <br>
+          <h4>Year
+            {{studentfeeledger.year}}
+          </h4> <br>
+          <h4>Fee
+            {{studentfeeledger.baseFee}}
+          </h4> <br>
+          <h4 *ngIf="studentfeeledger.annualFee!=null">Annual Fee
+            {{studentfeeledger.annualFee}}
+          </h4> <br>
+          <h4 *ngIf="studentfeeledger.deposit!=null">Deposit
+            {{studentfeeledger.deposit}}
+          </h4> <br>
+          <h4>Extra Charges
+            {{studentfeeledger.extraCharge}}
+          </h4> <br>
+          <h4>Late Payment Charges
+            {{studentfeeledger.latePaymentCharge}}
+          </h4> <br>
+          <h4>Total
+            {{studentfeeledger.totalFee}}
+          </h4> <br>
+          <h4>Invoice Date
+            {{studentfeeledger.invoiceDate}}
+          </h4> <br>
+          <h4>Payments
+          </h4> <br>
+          <h4>Status
+            {{studentfeeledger.paymentStatus}}
+          </h4>
+          <ion-button (click)="slipDownload(studentfeeledger.id)">
+            <i class="fa fa-spinner fa-fw fa-pulse fa-2x"></i>
+            <span class="glyphicon glyphicon-download-alt"></span> slip
+          </ion-button>
+          <ion-button (click)="receiptDownload(studentfeeledger.id)" *ngIf="studentfeeledger.paymentStatus=='Paid' || studentfeeledger.paymentStatus=='PartiallyPaid'">
+            <i class="fa fa-spinner fa-fw fa-pulse fa-2x"></i>
+            <span class="glyphicon glyphicon-download-alt"></span> receipt
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

@@ -10,11 +10,15 @@ import { AlertService } from 'src/app/providers/alertService';
 })
 export class ProfilePage implements OnInit {
   student: any;
+  studentDetailssegment = 'student';
   studentForm: FormGroup;
   selectedStudent: string;
   studentId: number;
   parent: any = [];
   studentchange = false;
+    slideOpts = {
+    effect: 'flip'
+  };
   constructor(
     private parentService: ParentService,
     private alertService: AlertService,

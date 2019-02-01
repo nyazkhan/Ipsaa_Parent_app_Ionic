@@ -17,6 +17,10 @@ export class FeePage implements OnInit {
   myDetailId: any;
   linkPage: string;
   studentchange: boolean;
+  slideOpts = {
+    effect: 'flip'
+  };
+
   constructor(
     private parentService: ParentService,
     private alertService: AlertService,
@@ -104,5 +108,7 @@ export class FeePage implements OnInit {
         // FileSaver.saveAs(blob, res.fileName);
       });
   }
+
+
 
 }
