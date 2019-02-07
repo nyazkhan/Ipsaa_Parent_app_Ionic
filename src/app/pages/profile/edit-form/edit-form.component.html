@@ -1,0 +1,98 @@
+<div *ngIf="studentDetails?.parents[0]">
+
+
+  <div padding>
+    <ion-segment [(ngModel)]="studentDetailssegment">
+      <ion-segment-button *ngFor="let parent of  studentDetails?.parents; let i = index" [value]="parent">
+        {{ parent.relationship}}
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <form #editForm="ngForm">
+    <!-- <div [ngSwitch]="studentDetailssegment"> -->
+
+      <!-- <div *ngFor=" let parent of studentDetails?.parents; let i=index"> -->
+        <ion-card >
+
+          <ion-item>
+            <ion-label stacked color="primary">Phone</ion-label>
+            <!-- <ion-input type="tel" [ngModel]="studentDetails?.parent[i]?.mobile" name="mobile"></ion-input> -->
+          </ion-item>
+
+          <ion-item>
+            <ion-label stacked>Email</ion-label>
+            <!-- <ion-input [ngModel]="studentDetails?.parent[i]?.email" name="email" required></ion-input> -->
+          </ion-item>
+
+          <!-- <div>
+            <ion-card class="addressform"> -->
+
+              <ion-label stacked>Residential Address</ion-label>
+
+              <ion-item class="addressFiled margin-top">
+                <ion-label stacked color="primary">Address</ion-label>
+                <ion-input [(ngModel)]="studentDetailssegment.residentialAddress.address" name="Faddress" required></ion-input>
+              </ion-item>
+
+              <ion-item class="addressFiled">
+                <ion-label stacked color="primary">City</ion-label>
+                <ion-input [(ngModel)]="studentDetailssegment.residentialAddress.city" name="Fcity" required></ion-input>
+              </ion-item>
+
+
+              <ion-item class="addressFiled">
+                <ion-label stacked color="primary">State</ion-label>
+                <ion-input [(ngModel)]="studentDetailssegment.residentialAddress.state" name="Fstate" required></ion-input>
+              </ion-item>
+
+              <ion-item class="addressFiled">
+                <ion-label stacked color="primary">Postal-Code</ion-label>
+                <ion-input type="number" [(ngModel)]="studentDetailssegment.residentialAddress.zipcode" name="Fzipcode"
+                  required></ion-input>
+              </ion-item>
+
+
+
+            <!-- </ion-card>
+          </div>
+
+          <div>
+            <ion-card class="addressform"> -->
+
+              <ion-label stacked>Office Address</ion-label>
+              <ion-item class="addressFiled margin-top">
+                <ion-label stacked color="primary">Address</ion-label>
+                <ion-input [(ngModel)]="studentDetailssegment.officeAddress.address" name="address" required></ion-input>
+              </ion-item>
+
+              <ion-item class="addressFiled">
+                <ion-label stacked color="primary">City</ion-label>
+                <ion-input [(ngModel)]="studentDetailssegment.officeAddress.city" name="city" required></ion-input>
+              </ion-item>
+
+
+              <ion-item class="addressFiled">
+                <ion-label stacked color="primary">State</ion-label>
+                <ion-input [(ngModel)]="studentDetailssegment.officeAddress.state" name="state" required></ion-input>
+              </ion-item>
+
+              <ion-item class="addressFiled">
+                <ion-label stacked color="primary">Postal-Code</ion-label>
+                <ion-input type="number" [(ngModel)]="studentDetailssegment.officeAddress.zipcode" name="zipcode"
+                  required></ion-input>
+              </ion-item>
+
+
+
+            </ion-card>
+        
+          <!-- </div>s -->
+        <!-- <button ion-button full rounded [disabled]="editForm.invalid" (click)="onSave(editForm.value)">Save</button> -->
+      <!-- </div> -->
+      <ion-button (click)="saveDtailse()">save</ion-button>
+      <ion-button (click)="goBack()"> cancel</ion-button>
+  
+    <!-- </div> -->
+  </form>
+</div>

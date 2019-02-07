@@ -125,4 +125,8 @@ export class User {
     this.storage.storeData('ngStorage-privileges', resp.privileges);
     this._user = resp.user;
   }
+
+  isLoggedIn() {
+    return localStorage.getItem('ngStorage-token') ? true : false;
+}
 }

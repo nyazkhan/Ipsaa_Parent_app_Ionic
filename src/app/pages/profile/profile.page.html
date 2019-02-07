@@ -165,8 +165,9 @@
           <ion-img  *ngIf="!student?.imagePath" class="img" src="https://www.momspresso.com/business-image/104017/ipsaa-day-care-pvt-ltd31.jpg" ></ion-img>
   
           <ion-card-header no-padding>
-            <ion-card-title padding>
+            <ion-card-title padding >
               {{student?.fullName}}
+              <ion-button (click)="editStudent()">edit</ion-button>
             </ion-card-title>
   
           </ion-card-header>

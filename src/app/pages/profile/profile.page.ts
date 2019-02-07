@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ParentService } from 'src/app/providers/parent.service';
 import { AlertService } from 'src/app/providers/alertService';
+import { ModalController } from '@ionic/angular';
+import { EditFormComponent } from './edit-form/edit-form.component';
 
 @Component({
   selector: 'app-profile',
@@ -16,39 +18,60 @@ export class ProfilePage implements OnInit {
   studentId: number;
   parent: any = [];
   studentchange = false;
-    slideOpts = {
+  slideOpts = {
     effect: 'flip'
   };
+
   constructor(
     private parentService: ParentService,
     private alertService: AlertService,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
     this.getStudents();
   }
   getStudents() {
+    this.alertService.presentLoading();
     this.parentService.getStudentDetails()
       .subscribe((res: any) => {
         this.parent = res;
         this.studentId = this.parent[0].id;
         this.getStudentsDetails(this.studentId);
-      });
+      }, (err) => {
+        this.alertService.hideLoader();
+      }
+      );
   }
 
   getStudentsDetails(std_id) {
     this.parentService.getDetailsByStudentId(std_id)
       .subscribe((res: any) => {
         this.student = res;
-        if (this.studentchange) {
-          this.alertService.hideLoader();
-        }
+        this.alertService.hideLoader();
+
+      }, (err) => {
+        this.alertService.hideLoader();
+
       });
   }
 
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: EditFormComponent,
+      componentProps: { student: this.student }
+    });
+    modal.present();
+    const { data } = await modal.onDidDismiss();
+    console.log(data);
+    if (data) {
+
+      this.student = data.student;
+    }
+  }
 
   editStudent() {
-
+    this.presentModal();
   }
 
   notify(parent, sms_email) {

@@ -18,7 +18,7 @@ export class ParentService {
   }
 
   updateStudentDetails(details) {
-    return this.customservice.post('api/pp/student/', details);
+    return this.customservice.put('api/pp/student/profile', details);
 
   }
 
