@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { User } from './providers/user';
@@ -59,7 +59,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private user: User,
-    private router: Router
+    private router: Router,
+    private menu: MenuController
   ) {
     this.initializeApp();
   }
@@ -72,7 +73,10 @@ export class AppComponent {
   }
 
   logout() {
+    this.menu.enable(false);
+
     this.router.navigate(['/login']);
     this.user.logout();
+
   }
 }

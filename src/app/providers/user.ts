@@ -114,7 +114,7 @@ export class User {
     // this.storage.storeData('ngStorage-privileges', null);
     // this._user = null;
     this.storage.clearData();
-    location.reload();
+    // location.reload();
   }
 
   /**

@@ -74,10 +74,11 @@ export class LoginPage implements OnInit {
 
       this.router.navigate(['/profile']);
     } else {
+
       this.userService.logout();
       // this.router.navigate(['/login']);
 
-      // this.alertservice.presentLoading(' User Name or Password is incorrect..');
+      this.alertservice.presentToastWithOptions(' User Name or Password is incorrect..');
 
       // this.router.navigate(['mis']);
     }
