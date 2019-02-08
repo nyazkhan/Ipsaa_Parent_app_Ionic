@@ -20,7 +20,7 @@
         <h3>Created at <ion-badge slot="end"  > {{ query.created}}</ion-badge></h3>
         <h3>Last Action <ion-badge slot="end" > {{ query.lastAction}}</ion-badge></h3>
       
-            <ion-button (click)="getQueryDetails(query.id)">
+            <ion-button (click)="presentModal(query.id)">
               Action
             </ion-button>
       </ion-card-header>

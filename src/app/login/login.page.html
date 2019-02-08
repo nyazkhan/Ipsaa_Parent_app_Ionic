@@ -1,43 +1,43 @@
-
-<ion-content padding style="--color: white; --background: url('https://images.unsplash.com/photo-1530579807716-d82c0991629a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c708171e9cdb8ae7ed04f8e37e2808c&auto=format&fit=crop&w=934&q=80') no-repeat center center fixed" >
-  
-  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="loginForm">
-  <ion-card class="loginCard">
-    <ion-card-header color="warning" >
-      <ion-card-title  >Login</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content style=" background-color: #f0f0f0;">
-      <ion-label stacked>Email Id</ion-label>
-      <br>
-        <ion-item>
-            <ion-icon color="danger" name="person" item-left></ion-icon>
-            <ion-input type="text" formControlName="email" placeholder="Enter Email Id"></ion-input>
-          </ion-item>
-          <div *ngIf="(email.dirty || submitAttempt) && !email.valid" class="valid">
-            <span *ngIf="email.hasError('required')" >email Id  is required.</span>
-            <span *ngIf="email.hasError('pattern')" >email Id  is invalid.</span>
-          </div>
-
-          <br>
-          
-          <ion-label stacked>Password</ion-label>
-          <br>
-      <ion-item>
-          <ion-icon color="danger" name="unlock" item-left></ion-icon>
-          <ion-input type="password" formControlName="password" placeholder="Add Password"></ion-input>
-        </ion-item>
-        <div no-lines *ngIf="(password.dirty || submitAttempt) && !password.valid" class="valid" margin-bottom>
-          <span>Password is required.</span>
+<ion-grid>
+  <ion-row align-items-center>
+    <ion-col align-self-center>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="loginForm" align-self-center>
+          <ion-img class="center logo-img" src="../assets/img/ipsaa-logo.png"></ion-img>
+          <div class="loginCard">
+            
+            <div class="ion-input-field">
+                <!-- <ion-icon color="primary" name="person" item-left></ion-icon> -->
+                <ion-label stacked>Email Id</ion-label>
+                <ion-input type="text" formControlName="email" placeholder="Enter Email Id"></ion-input>
+            </div>
+            
+            <div *ngIf="(email.dirty || submitAttempt) && !email.valid" class="valid">
+              <span *ngIf="email.hasError('required')" >email Id  is required.</span>
+              <span *ngIf="email.hasError('pattern')" >email Id  is invalid.</span>
+            </div>
+        
+            
+            <div class="ion-input-field">
+              <ion-label stacked>Password</ion-label>
+              <!-- <ion-icon color="primary" name="unlock" item-left></ion-icon> -->
+              <ion-input type="password" formControlName="password" placeholder="Enter Password"></ion-input>
+            </div>
+        
+            <div no-lines *ngIf="(password.dirty || submitAttempt) && !password.valid" class="valid" margin-bottom>
+              <span>Password is required.</span>
+            </div>
+            
+            <div text-right>
+              <a color="primary" href="#">Forgot Password</a>
+            </div>
+        
+            <ion-button color="primary" margin-top type="submit"  *ngIf="!submitAttempt" shape="round" expand="full" center> Login</ion-button>
+            <ion-button  color="primary" margin-top  *ngIf="submitAttempt" shape="round" expand="full" center> Logging</ion-button>
+        
         </div>
-        <br>
-
-        <ion-button type="submit"  *ngIf="!submitAttempt" shape="round" center> Login</ion-button>
-        <ion-button   *ngIf="submitAttempt" shape="round" center> Logging</ion-button>
-
-
-      </ion-card-content>
-
-    </ion-card>
-  </form>
-</ion-content>
+    
+        </form>
+     
+    </ion-col>
+  </ion-row>
+</ion-grid>

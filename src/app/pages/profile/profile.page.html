@@ -167,7 +167,7 @@
           <ion-card-header no-padding>
             <ion-card-title padding >
               {{student?.fullName}}
-              <ion-button (click)="editStudent()">edit</ion-button>
+              <!-- <ion-button (click)="editStudent()">edit</ion-button> -->
             </ion-card-title>
   
           </ion-card-header>
@@ -210,7 +210,10 @@
         <ion-card  *ngSwitchCase="'parent' + i" >
           <ion-card-header>
             <ion-card-subtitle>
-              <h3 no-margin>{{parent?.relationship}}</h3>
+              <h3 style="display: inline-block; width: auto; " no-margin>{{parent?.relationship}}</h3>
+              <!-- <ion-button (click)="editStudent()">edit</ion-button> -->
+              <ion-icon color="primary" class="edit-parent" (click)="editStudent()" name="create"></ion-icon>
+
             </ion-card-subtitle>
   
           </ion-card-header>

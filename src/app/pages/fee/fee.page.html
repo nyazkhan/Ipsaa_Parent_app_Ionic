@@ -19,8 +19,23 @@
 
     </ion-list>
   </ion-card>
-  <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide>
+
+  <div padding>
+    <ion-segment [(ngModel)]="studentFeeDetailSsegment">
+      <ion-segment-button value="details">
+        Student details
+      </ion-segment-button>
+      <ion-segment-button value="feeDetails">
+        Fee Details
+      </ion-segment-button>
+      <ion-segment-button value="lastPayment">
+        last Payment
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="studentFeeDetailSsegment">
+    <div *ngSwitchCase="'details'">
       <ion-card *ngIf="fee">
         <ion-card-header>
           <ion-card-title>
@@ -51,8 +66,8 @@
           </div>
         </ion-card-content>
       </ion-card>
-    </ion-slide>
-    <ion-slide>
+    </div>
+    <div *ngSwitchCase="'feeDetails'">
       <ion-card *ngIf="fee">
         <ion-card-header>
           <ion-card-title>
@@ -90,8 +105,8 @@
           <br>
         </ion-card-content>
       </ion-card>
-    </ion-slide>
-    <ion-slide>
+    </div>
+    <div *ngSwitchCase="'lastPayment'">
       <ion-card *ngIf="studentfeeledger">
         <ion-card-header>
           <ion-card-title>
@@ -141,6 +156,7 @@
           </ion-button>
         </ion-card-content>
       </ion-card>
-    </ion-slide>
-  </ion-slides>
+    </div>
+
+  </div>
 </ion-content>

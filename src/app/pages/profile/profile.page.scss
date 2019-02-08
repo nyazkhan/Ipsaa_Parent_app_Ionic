@@ -1,4 +1,14 @@
+
 span{
-    color: #696969;
-    font-size: 15px;
-  }
+  color: #696969;
+  font-size: 15px;
+}
+.edit-parent{
+    display: inline-block;
+    width: 15px;
+    float: right;
+    height: 15px;
+    border: solid 1px #ddd;
+    padding: 4px;
+    border-radius: 3px;
+}

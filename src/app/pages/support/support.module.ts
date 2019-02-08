@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { SupportPage } from './support.page';
+import { QueryComponent } from './query/query.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SupportPage]
+  declarations: [SupportPage, QueryComponent],
+  entryComponents: [
+    QueryComponent
+]
 })
 export class SupportPageModule {}

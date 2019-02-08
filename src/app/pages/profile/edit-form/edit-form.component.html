@@ -17,12 +17,30 @@
 
           <ion-item>
             <ion-label stacked color="primary">Phone</ion-label>
-            <!-- <ion-input type="tel" [ngModel]="studentDetails?.parent[i]?.mobile" name="mobile"></ion-input> -->
+            <ion-input type="tel" [ngModel]="studentDetailssegment.mobile" name="mobile"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label stacked>Email</ion-label>
-            <!-- <ion-input [ngModel]="studentDetails?.parent[i]?.email" name="email" required></ion-input> -->
+            <ion-label stacked  color="primary">Email</ion-label>
+            <ion-input [ngModel]="studentDetailssegment.email" name="email" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked color="primary"> Educational Qualification:</ion-label>
+            <ion-input  [ngModel]="studentDetailssegment.educationalQualification" name="educationalQualification"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label stacked  color="primary">Occupation</ion-label>
+            <ion-input [ngModel]="studentDetailssegment.occupation" name="occupation" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked color="primary">Designation</ion-label>
+            <ion-input  [ngModel]="studentDetailssegment.designation" name="designation"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label stacked  color="primary">Organisation</ion-label>
+            <ion-input [ngModel]="studentDetailssegment.organisation" name="organisation" required></ion-input>
           </ion-item>
 
           <!-- <div>

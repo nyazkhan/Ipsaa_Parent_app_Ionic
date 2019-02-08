@@ -12,6 +12,7 @@ export class FeePage implements OnInit {
   studentfeeledgerId: number;
   fee: any;
   checkoutDetails: any;
+  studentFeeDetailSsegment = 'details';
   studentId: number;
   parent: any = [];
   myDetailId: any;

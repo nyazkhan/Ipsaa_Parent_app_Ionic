@@ -1,0 +1,49 @@
+
+
+
+
+
+<ion-card>
+  <div *ngIf="query" >
+  
+  <ul class="timeline timeline-simple">
+    <li class="timeline-inverted">
+      <div class="timeline-badge success">
+        <i class="material-icons">face</i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4><span class="btn btn-rose btn-round btn-sm">{{query.status}}</span> &nbsp; &nbsp;  {{query.title}}</h4>
+        </div>
+        <div class="timeline-body">
+          <p>{{query.description}}</p>
+        </div>
+        <h6>
+          <i class="ti-time"><span class="label label-success">{{query.raisedBy}}</span> {{query.created}}</i>
+        </h6>
+      </div>
+    </li>
+    <li class="timeline-inverted" *ngFor=" let reply of query?.replies">
+      <div class="timeline-badge success">
+        <i class="material-icons">cached</i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          <p>{{reply.description}}</p>
+        </div>
+        <h6>
+          <i class="ti-time"><span class="label label-success">{{reply.repliedBy}}</span> {{reply.created}}</i>
+        </h6>
+      </div>
+    </li>
+  </ul>
+  
+  
+  <ion-label>Send Query</ion-label>
+  <ion-textarea name="Msg" [(ngModel)]="replyText"></ion-textarea>
+  <ion-button class="btn btn-rose btn-round btn-sm" (click)="replyToQuery(query)">REPLY</ion-button>
+  <ion-button class="btn btn-rose btn-round btn-sm" (click)="goBack()">Back</ion-button>
+
+  </div>
+
+</ion-card>

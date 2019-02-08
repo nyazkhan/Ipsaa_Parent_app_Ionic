@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ParentService } from 'src/app/providers/parent.service';
 import { AlertService } from 'src/app/providers/alertService';
+import { ModalController } from '@ionic/angular';
+import { QueryComponent } from './query/query.component';
 
 @Component({
   selector: 'app-support',
@@ -29,19 +31,11 @@ export class SupportPage implements OnInit {
     'bluetooth',
     'build'
   ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(
-
+    private modalController: ModalController,
     private parentService: ParentService,
     private alertService: AlertService,
   ) {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
   }
 
   ngOnInit() {
@@ -63,11 +57,25 @@ export class SupportPage implements OnInit {
   getQuerie() {
     this.parentService.getQueries()
       .subscribe((res: any) => {
-        console.log(res);
         this.queries = res;
         // this.studentId = this.parent[0].id;
       });
   }
+
+  async presentModal(QueryId) {
+    const modal = await this.modalController.create({
+      component: QueryComponent,
+      componentProps: { id: QueryId }
+    });
+    modal.present();
+    const { data } = await modal.onDidDismiss();
+    if (data) {
+
+    }
+  }
+
+
+
   getQueryDetails(id) {
     this.parentService.getQuery(id)
       .subscribe((res: any) => {
